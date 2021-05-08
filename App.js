@@ -1,13 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import FlashMessage from 'react-native-flash-message';
+import { NavigationContainer } from '@react-navigation/native';
+
+import MainRoutes from './src/routes/main.routes';
+import { AuthProvider } from './src/context/auth';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <AuthProvider>
+      <NavigationContainer>
+        <StatusBar style="auto" />
+        <MainRoutes />
+
+        <FlashMessage
+          floating={true}
+          style={{ alignItems: 'center' }}
+          titleStyle={{ fontWeight: 'bold' }}
+        />
+      </NavigationContainer>
+    </AuthProvider>
   );
 }
 
